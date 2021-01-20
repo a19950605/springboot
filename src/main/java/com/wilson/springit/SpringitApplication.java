@@ -1,6 +1,10 @@
 package com.wilson.springit;
 
 import com.wilson.springit.config.SpringitProperties;
+import com.wilson.springit.domain.Comment;
+import com.wilson.springit.domain.Link;
+import com.wilson.springit.repository.CommentRepository;
+import com.wilson.springit.repository.LinkRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -21,11 +25,19 @@ public class SpringitApplication {
     }
 
     @Bean
-    @Profile("dev")
-    CommandLineRunner runner(){ 
-        return args->{
-            System.out.println("this is sth we do in dev");
+    CommandLineRunner runner(LinkRepository linkRepository, CommentRepository commentRepository) {
+        return args -> {
+            Link link = new Link("Getting Started with Spring Boot 2", "https://therealdanvega.com/spring-boot-2");
+            linkRepository.save(link);
+
+            Comment comment = new Comment("This Spring Boot 2 Link is awesome", link);
+            commentRepository.save(comment);
+            link.addComment(comment);
+
+          //  System.out.println(link.getComments());
+            System.out.println("we just add new comment");
+
+//            Link firstLink = linkRepository.findByTitle("Getting started with spring boot 2");
         };
     }
-
 }
