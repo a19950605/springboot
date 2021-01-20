@@ -1,4 +1,4 @@
-package com.wilson.springit.model;
+package com.wilson.springit.domain;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,16 +10,13 @@ import javax.persistence.Id;
 @Entity
 @Data
 @NoArgsConstructor
-public class Vote {
+public class Comment {
 
 
     @Id
     @GeneratedValue
     private Long id;
-    private int vote;
-
-
-
+    private String body;
 
 
 }
