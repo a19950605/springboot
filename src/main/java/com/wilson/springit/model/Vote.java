@@ -19,7 +19,6 @@ public class Vote {
     private int vote;
 
 
-    public Vote(){}
 
 
 
